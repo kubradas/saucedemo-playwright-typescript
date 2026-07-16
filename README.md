@@ -1,5 +1,11 @@
 # SauceDemo — Playwright + TypeScript
 
+[![CI](https://github.com/kubradas/saucedemo-playwright-typescript/actions/workflows/ci.yml/badge.svg)](https://github.com/kubradas/saucedemo-playwright-typescript/actions/workflows/ci.yml)
+
+📊 **[Live test report](https://kubradas.github.io/saucedemo-playwright-typescript/)** — published from CI on every push
+
+---
+
 End-to-end UI test suite for [saucedemo.com](https://www.saucedemo.com/), built with Playwright and TypeScript.
 
 The application under test is deliberately simple. The engineering around it is not — this repo is about **how** a suite stays readable and cheap to maintain as it grows from 8 tests to 800.
@@ -56,6 +62,12 @@ Off locally, so a flaky test stays visible and gets fixed rather than masked gre
 **One generic assertion instead of two near-identical ones.**
 `assertSorted<T>` verifies both prices and names. Its array copy is load-bearing — `Array.sort()` mutates in place and returns the same reference, so sorting the original would compare it to itself and produce a test that can never fail. I confirmed it fails when it should by deliberately breaking it.
 
+**CI runs cheap checks before expensive ones.**
+`typecheck` and `format:check` take seconds and run before the suite, which spins up browsers and takes minutes — a broken type or an unformatted file fails immediately instead of waiting behind a full browser run. All three browsers run on every push, because a cross-browser claim that only ever runs in one browser is decoration.
+
+**The report is published, not archived.**
+Allure results uploaded as a CI artifact are technically available and practically invisible — nobody downloads a zip to look at a build. The report goes to GitHub Pages on every push with history carried over, so it's a link anyone can open, and flakiness surfaces as a trend across runs instead of a one-off red.
+
 ## Trade-offs
 
 - **One `CheckoutPage` for a three-step flow.** A stricter reading of POM would split info / overview / confirmation. At this size that's ceremony; if the flow grew, splitting would be right.
@@ -64,7 +76,7 @@ Off locally, so a flaky test stays visible and gets fixed rather than masked gre
 
 ## What I'd add next
 
-CI running typecheck, format check and the full suite on every push · API-level setup for preconditions instead of driving the UI · visual regression coverage for the product grid
+API-level setup for preconditions instead of driving the UI · visual regression coverage for the product grid
 
 ---
 
