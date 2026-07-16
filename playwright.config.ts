@@ -19,7 +19,10 @@ export default defineConfig({
   // Single worker on CI for stability, auto locally for speed.
   workers: process.env.CI ? 1 : undefined,
 
-  reporter: "html",
+  reporter: [
+  ["html", { open: "never" }],
+  ["allure-playwright", { resultsDir: "allure-results" }],
+],
 
   use: {
     // Lets tests navigate with page.goto('/') instead of repeating the full URL.
