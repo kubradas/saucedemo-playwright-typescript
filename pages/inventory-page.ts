@@ -1,5 +1,5 @@
 import { type Page, type Locator } from "@playwright/test";
-import { SortOption } from "../test-data/sort-options";
+import { type SortOption } from "../test-data/sort-options";
 
 export class InventoryPage {
   readonly page: Page;
@@ -36,7 +36,13 @@ export class InventoryPage {
 
   async getPrices(): Promise<number[]> {
     const texts = await this.itemPrices.allTextContents();
-    return texts.map((t) => Number(t.replace("$", "")));
+    return texts.map((text) => {
+      const price = Number(text.replace("$", ""));
+      if (Number.isNaN(price)) {
+        throw new Error(`Could not parse a price from "${text}"`);
+      }
+      return price;
+    });
   }
 
   async getNames(): Promise<string[]> {
