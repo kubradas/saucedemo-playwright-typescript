@@ -20,9 +20,9 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
 
   reporter: [
-  ["html", { open: "never" }],
-  ["allure-playwright", { resultsDir: "allure-results" }],
-],
+    ["html", { open: "never" }],
+    ["allure-playwright", { resultsDir: "allure-results" }],
+  ],
 
   use: {
     // Lets tests navigate with page.goto('/') instead of repeating the full URL.

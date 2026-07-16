@@ -36,7 +36,7 @@ npm run format                # prettier --write
 ## Architecture decisions
 
 **Page Objects hold locators and actions — never assertions or test data.**
-The same `CartPage` serves tests expecting 2 items, 3 items, or an empty cart. An expectation baked into the class welds it to one scenario. Page objects know *what the page is and what you can do with it*; tests know *what should be true*.
+The same `CartPage` serves tests expecting 2 items, 3 items, or an empty cart. An expectation baked into the class welds it to one scenario. Page objects know _what the page is and what you can do with it_; tests know _what should be true_.
 
 **Test data is typed, not stringly-typed.**
 Usernames are a literal union rather than `string`, so `"standrd_user"` fails at compile time with a suggested fix — instead of surfacing as a confusing login error minutes into a browser run. Checkout data comes from a factory with `Partial<T>` overrides, so each test shows only the field it actually cares about.
@@ -45,7 +45,7 @@ Usernames are a literal union rather than `string`, so `"standrd_user"` fails at
 Page objects arrive ready-made and typed, so specs contain intent and nothing else — no `new`, no setup noise.
 
 **Authentication happens once, not per test.**
-A setup project logs in a single time and writes the session to disk; browser projects load it and start authenticated. The detail that's easy to get wrong: tests that *exercise* authentication must opt out of it, or they silently stop proving anything.
+A setup project logs in a single time and writes the session to disk; browser projects load it and start authenticated. The detail that's easy to get wrong: tests that _exercise_ authentication must opt out of it, or they silently stop proving anything.
 
 **Retries differ by environment on purpose.**
 Off locally, so a flaky test stays visible and gets fixed rather than masked green. On in CI, where a shared-runner hiccup shouldn't break the pipeline. Same setting, opposite intent: local is for diagnosis, CI is for resilience.
