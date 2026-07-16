@@ -4,7 +4,7 @@ export type CheckoutInfo = {
   postalCode: string;
 };
 
-export const defaultCheckoutInfo: CheckoutInfo = {
+const defaultCheckoutInfo: CheckoutInfo = {
   firstName: "John",
   lastName: "Doe",
   postalCode: "34000",

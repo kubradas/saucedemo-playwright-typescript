@@ -5,4 +5,5 @@ export const SortOption = {
   PriceHighLow: "hilo",
 } as const;
 
+//Union of the const object's values. Stays in sync if options are added/removed
 export type SortOption = (typeof SortOption)[keyof typeof SortOption];
