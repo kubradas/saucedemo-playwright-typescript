@@ -4,6 +4,8 @@
 
 📊 **[Live test report](https://kubradas.github.io/saucedemo-playwright-typescript/)** — published from CI on every push
 
+[![Allure report overview](docs/allure-overview.png)](https://kubradas.github.io/saucedemo-playwright-typescript/)
+
 ---
 
 End-to-end UI test suite for [saucedemo.com](https://www.saucedemo.com/), built with Playwright and TypeScript.
